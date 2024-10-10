@@ -7,5 +7,5 @@ export function authenticateLogin(email, password) {
     //   if the actual password does not match input password,
     //      return an error and let user know
 
-    return false;
+    return true;
 }

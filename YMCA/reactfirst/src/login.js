@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {authenticateLogin} from './authenticateLogin';
@@ -6,11 +7,15 @@ import {authenticateLogin} from './authenticateLogin';
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        handleFormSubmit({email, password});
-    }
+        const successfulLogin = await handleFormSubmit({email, password});
+        if (successfulLogin) {
+            navigate('/programView');
+        }
+    };
     
     return (
         <Form onSubmit={handleSubmit}>
@@ -38,9 +43,14 @@ function Login() {
     );
 }
 
-function handleFormSubmit(formData) {
-    const successfulLogin = authenticateLogin(formData.email, formData.password);
-    console.log(successfulLogin);
+async function handleFormSubmit(formData) {
+    try {
+        const successfulLogin = await authenticateLogin(formData.email, formData.password);
+        return successfulLogin;
+    } catch (error) {
+        console.error('Login failed:', error);
+        return false;
+    }
 }
 
 export default Login;

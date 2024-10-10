@@ -7,6 +7,7 @@ import './index.css';
 
 import App from './App';
 import Login from './login';
+import ProgramView from './programView';
 //import AuthenticateLogin from './authenticateLogin';
 import reportWebVitals from './reportWebVitals';
 
@@ -17,6 +18,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/programView" element={<ProgramView />} />
     </Routes>
   </Router>
 );
