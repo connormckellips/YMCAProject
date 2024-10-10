@@ -43,6 +43,24 @@ app.get('/api/classes/search', (req, res) => {
     });
 });
 
+// Endpoint to set up a class
+app.get('/api/classes/add', (req, res) => {
+    const classID = req.query.id;
+    const className = req.query.name;
+    const description = req.query.description;
+    const date = req.query.date;
+    const start = req.query.start;
+    const end = req.query.end;
+    const teacherID = req.query.teacherID;
+    const query = 'INSERT INTO classes ? ? ? ? ? ? ? ';
+    db.all(query, [`%${classID}%`, `%${className}%`, `%${description}%`, `%${date}%`, `%${start}%`, `%${end}%`, `%${teacherID}%`], (err) => {
+        if (err) {
+            console.error('Error executing query:', err.message);
+            res.status(500).json({ error: err.message });
+            return;
+        }
+    });
+});
 
 
 app.listen(port, () => {
