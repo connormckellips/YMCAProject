@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { fetchClasses } from './api';
+import Button from 'react-bootstrap/Button';
 
 function ProgramView() {
     const [classes, setClasses] = useState([]);
@@ -25,6 +26,7 @@ function ProgramView() {
                     <li key={classItem.id}>{classItem.name}</li>
                 ))}
             </ul>
+            <Button> Add Class </Button>
         </div>
     );
 }
